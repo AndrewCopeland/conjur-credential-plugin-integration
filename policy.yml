@@ -1,0 +1,11 @@
+- !host test-jenkins
+
+- !variable git/access-token
+- !variable git/ssh-key
+
+- !permit
+  role: !host test-jenkins
+  privilege: [ read, execute ]
+  resources:
+  - !variable git/access-token
+  - !variable git/ssh-key
