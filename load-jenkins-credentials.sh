@@ -1,0 +1,3 @@
+curl -X POST -H 'content-type:application/xml' -d @jenkins/credentials/HOST_TEST_JENKINS.xml "http://localhost:8080/job/team1/credentials/store/folder/domain/_/createCredentials"
+curl -X POST -H 'content-type:application/xml' -d @jenkins/credentials/GIT_ACCESS_TOKEN.xml "http://localhost:8080/job/team1/credentials/store/folder/domain/_/createCredentials"
+curl -X POST -H 'content-type:application/xml' -d @jenkins/credentials/GIT_ACCESS_TOKEN_USERNAME.xml "http://localhost:8080/job/team1/credentials/store/folder/domain/_/createCredentials"

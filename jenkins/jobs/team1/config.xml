@@ -1,0 +1,70 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<com.cloudbees.hudson.plugins.folder.Folder plugin="cloudbees-folder@6.10.0">
+  <actions/>
+  <description></description>
+  <properties>
+    <com.cloudbees.hudson.plugins.folder.properties.FolderCredentialsProvider_-FolderCredentialsProperty>
+      <domainCredentialsMap class="hudson.util.CopyOnWriteMap$Hash">
+        <entry>
+          <com.cloudbees.plugins.credentials.domains.Domain plugin="credentials@2.3.0">
+            <specifications/>
+          </com.cloudbees.plugins.credentials.domains.Domain>
+          <java.util.concurrent.CopyOnWriteArrayList>
+            <org.conjur.jenkins.conjursecrets.ConjurSecretCredentialsImpl plugin="Conjur@0.7">
+              <id>GIT_ACCESS_TOKEN</id>
+              <description></description>
+              <variablePath>git/access-token</variablePath>
+            </org.conjur.jenkins.conjursecrets.ConjurSecretCredentialsImpl>
+            <com.cloudbees.plugins.credentials.impl.UsernamePasswordCredentialsImpl plugin="credentials@2.3.0">
+              <scope>GLOBAL</scope>
+              <id>HOST_TEST_JENKINS</id>
+              <description>Conjur host for jenkins</description>
+              <username>host/test-jenkins</username>
+              <password>{AQAAABAAAABASKza/tO914SEFQuG5MSb6YXdz/H6vMRmfiBTmYJedAX768t0R86QYO39Az7H0KBt8wmKDLVV9I+fIZDf/jEsEwQc/XGjb+tI+ApHrkEy/rU=}</password>
+            </com.cloudbees.plugins.credentials.impl.UsernamePasswordCredentialsImpl>
+            <org.conjur.jenkins.conjursecrets.ConjurSecretUsernameCredentialsImpl plugin="Conjur@0.7">
+              <id>GIT_ACCESS_TOKEN_USERNAME</id>
+              <description></description>
+              <username>username</username>
+              <credentialID>GIT_ACCESS_TOKEN</credentialID>
+              <conjurConfiguration>
+                <applianceURL>https://conjur-master</applianceURL>
+                <account>conjur</account>
+                <credentialID>HOST_TEST_JENKINS</credentialID>
+                <certificateCredentialID></certificateCredentialID>
+              </conjurConfiguration>
+              <passphrase>{AQAAABAAAAAQC1aWfzdp9xDeblS8HSjOZ+AvSqsF0nzCvToi2aCXO4Y=}</passphrase>
+            </org.conjur.jenkins.conjursecrets.ConjurSecretUsernameCredentialsImpl>
+          </java.util.concurrent.CopyOnWriteArrayList>
+        </entry>
+      </domainCredentialsMap>
+    </com.cloudbees.hudson.plugins.folder.properties.FolderCredentialsProvider_-FolderCredentialsProperty>
+    <org.conjur.jenkins.configuration.FolderConjurConfiguration plugin="Conjur@0.7">
+      <inheritFromParent>false</inheritFromParent>
+      <conjurConfiguration>
+        <applianceURL>https://conjur-master</applianceURL>
+        <account>conjur</account>
+        <credentialID>HOST_TEST_JENKINS</credentialID>
+        <certificateCredentialID></certificateCredentialID>
+      </conjurConfiguration>
+    </org.conjur.jenkins.configuration.FolderConjurConfiguration>
+  </properties>
+  <folderViews class="com.cloudbees.hudson.plugins.folder.views.DefaultFolderViewHolder">
+    <views>
+      <hudson.model.AllView>
+        <owner class="com.cloudbees.hudson.plugins.folder.Folder" reference="../../../.."/>
+        <name>All</name>
+        <filterExecutors>false</filterExecutors>
+        <filterQueue>false</filterQueue>
+        <properties class="hudson.model.View$PropertyList"/>
+      </hudson.model.AllView>
+    </views>
+    <tabBar class="hudson.views.DefaultViewsTabBar"/>
+  </folderViews>
+  <healthMetrics>
+    <com.cloudbees.hudson.plugins.folder.health.WorstChildHealthMetric>
+      <nonRecursive>false</nonRecursive>
+    </com.cloudbees.hudson.plugins.folder.health.WorstChildHealthMetric>
+  </healthMetrics>
+  <icon class="com.cloudbees.hudson.plugins.folder.icons.StockFolderIcon"/>
+</com.cloudbees.hudson.plugins.folder.Folder>
