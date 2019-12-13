@@ -1,7 +1,0 @@
-<com.cloudbees.plugins.credentials.impl.UsernamePasswordCredentialsImpl>
-  <scope>GLOBAL</scope>
-  <id>HOST_TEST_JENKINS_GLOBAL</id>
-  <description>Conjur host for jenkins</description>
-  <username>host/test-jenkins</username>
-  <password>2b05ax8bvy3763t49amp1tmd93y1n7bz1h1yc1njk15g37vq2gfrqe</password>
-</com.cloudbees.plugins.credentials.impl.UsernamePasswordCredentialsImpl>
