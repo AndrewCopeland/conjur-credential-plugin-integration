@@ -19,7 +19,7 @@
   <buildWrappers>
     <org.jenkinsci.plugins.credentialsbinding.impl.SecretBuildWrapper plugin="credentials-binding@1.20">
       <bindings>
-        <org.conjur.jenkins.conjursecrets.ConjurSecretCredentialsBinding plugin="Conjur@0.7">
+        <org.conjur.jenkins.conjursecrets.ConjurSecretCredentialsBinding plugin="Conjur@0.8">
           <credentialsId>GIT_ACCESS_TOKEN_GLOBAL</credentialsId>
           <variable>CONJUR_SECRET</variable>
         </org.conjur.jenkins.conjursecrets.ConjurSecretCredentialsBinding>

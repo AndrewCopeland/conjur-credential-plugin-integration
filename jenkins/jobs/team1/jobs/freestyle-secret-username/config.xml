@@ -23,7 +23,7 @@ echo &quot;SECRET: $password&quot;</command>
   <buildWrappers>
     <org.jenkinsci.plugins.credentialsbinding.impl.SecretBuildWrapper plugin="credentials-binding@1.20">
       <bindings>
-        <org.conjur.jenkins.conjursecrets.ConjurSecretUsernameCredentialsBinding plugin="Conjur@0.7">
+        <org.conjur.jenkins.conjursecrets.ConjurSecretUsernameCredentialsBinding plugin="Conjur@0.8">
           <credentialsId>GIT_ACCESS_TOKEN_USERNAME</credentialsId>
           <usernameVariable>USERNAME</usernameVariable>
           <passwordVariable>CONJUR_SECRET</passwordVariable>
