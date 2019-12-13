@@ -1,3 +1,5 @@
+source config.sh
+
 PWD=$(pwd)
 cd conjur-credentials-plugin
 mvn install -DskipTests

@@ -1,3 +1,5 @@
+set -e
+
 export IMAGE_NAME="captainfluffytoes/dap:11.1"
 export CONJUR_NAME="conjur-master"
 export ADMIN_PASSWORD="Cyberark1"

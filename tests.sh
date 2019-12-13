@@ -1,6 +1,8 @@
 source config.sh
-# set -x #echo one
-
+# set -ex #echo one
+# its failing for some reason when set -e.
+# I have to look into this but at this point the instance should be setup correctly.
+set +e
 TOTAL_TESTS=0
 PASSED_TESTS=0
 FAILED_TESTS=0
@@ -101,11 +103,17 @@ validate_test "" "freestyle-secret-username" "$id_freestyle_secret_username_glob
 
 end=$(date +%s)
 duration=$((end - start))
+echo "------------------------------"
+echo "OUTPUT"
+echo "------------------------------"
 echo "test duration $duration seconds"
+echo "PASSED: $PASSED_TESTS"
+echo "FAILED: $FAILED_TESTS"
+echo "TOTAL: $TOTAL_TESTS"
 
-if [[ $TOTAL_TEST -eq $PASSED_TESTS ]] ; then
+if [[ $TOTAL_TESTS -eq $PASSED_TESTS ]] ; then
   echo "success all tests passed"
 else 
-  echo "FAILED: $FAILED_TESTS tests failed out of $TOTAL_TESTS tests"
+  echo "FAILED! All tests did not pass!"
 fi
 

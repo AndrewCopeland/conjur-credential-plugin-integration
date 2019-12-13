@@ -1,5 +1,5 @@
 source config.sh
-
+set +e
 rm -rf conjur
 rm -rf conjur-policy-parser/
 rm -rf tmp

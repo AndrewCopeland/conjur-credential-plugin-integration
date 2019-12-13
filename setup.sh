@@ -2,7 +2,9 @@ source config.sh
 
 start_time=$(date +%s)
 
-docker network create conjur
+./cleanup.sh || true
+docker network create conjur || true
+
 api_key=""
 if [[ "$1" == "dap" ]]; then
   ./setup-dap.sh | tee output

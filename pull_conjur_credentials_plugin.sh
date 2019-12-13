@@ -1,3 +1,5 @@
+source config.sh
+
 if [[ "$CREDENTIAL_PLUGIN_BRANCH" == "master"  ]]; then
   git clone $CREDENTIAL_PLUGIN_REPO
 else
