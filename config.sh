@@ -10,7 +10,6 @@ export JENKINS_URL="http://127.0.0.1:8080"
 export JENKINS_USERNAME="conjur"
 export JENKINS_PASSWORD="Cyberark1"
 
-
 export GIT_ACCESS_TOKEN="default"
 export GIT_SSH_KEY="default"
 

@@ -69,11 +69,11 @@ function validate_test {
   if [[ "$default_password" == "" ]]; then
     echo "$console"
     echo "FAILED: Recieved invalid password from jenkins"
-	FAILED_TESTS=$(($FAILED_TESTS + 1))
+	  FAILED_TESTS=$(($FAILED_TESTS + 1))
     # exit 1
   else
-	PASSED_TESTS=$(($PASSED_TESTS + 1))
-	echo "PASSED"
+	  PASSED_TESTS=$(($PASSED_TESTS + 1))
+	  echo "PASSED"
   fi
 }
 

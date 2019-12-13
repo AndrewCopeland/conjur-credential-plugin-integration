@@ -1,7 +1,3 @@
-CREDENTIAL_PLUGIN_REPO="https://github.com/cyberark/conjur-credentials-plugin.git"
-CREDENTIAL_PLUGIN_BRANCH="JIT-Creds"
-
-
 if [[ "$CREDENTIAL_PLUGIN_BRANCH" == "master"  ]]; then
   git clone $CREDENTIAL_PLUGIN_REPO
 else
