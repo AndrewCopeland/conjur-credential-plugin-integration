@@ -29,7 +29,7 @@ if [[ "$1" == "dap" ]]; then
   mkdir tmp
   cert_path="tmp/conjur-$CONJUR_ACCOUNT_NAME.pem"
   docker exec $CONJUR_NAME openssl s_client --showcerts --connect conjur-master:443 < /dev/null 2> /dev/null | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > $cert_path
-  cp -r tmp/ jenkins/
+  cp cert_path jenkins/
   docker pull jenkins/jenkins
   docker build -t jenkins/conjur-jenkins:latest jenkins/
   ./setup-jenkins.sh "jenkins/conjur-jenkins:latest"
