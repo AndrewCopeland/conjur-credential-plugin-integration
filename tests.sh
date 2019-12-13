@@ -115,5 +115,6 @@ if [[ $TOTAL_TESTS -eq $PASSED_TESTS ]] ; then
   echo "success all tests passed"
 else 
   echo "FAILED! All tests did not pass!"
+  exit 1
 fi
 

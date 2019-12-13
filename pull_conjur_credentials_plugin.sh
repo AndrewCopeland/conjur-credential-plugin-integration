@@ -8,7 +8,7 @@ fi
 
 PWD=$(pwd)
 cd conjur-credentials-plugin
-mvn install -DskipTests
+mvn install -q -DskipTests
 PLUGIN_PATH="$(pwd)/target/Conjur.hpi"
 cd $PWD
 
