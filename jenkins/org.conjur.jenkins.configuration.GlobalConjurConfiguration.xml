@@ -1,0 +1,9 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<org.conjur.jenkins.configuration.GlobalConjurConfiguration plugin="Conjur@0.8">
+  <conjurConfiguration>
+    <applianceURL>https://conjur-master</applianceURL>
+    <account>conjur</account>
+    <credentialID>HOST_TEST_JENKINS_GLOBAL</credentialID>
+    <certificateCredentialID></certificateCredentialID>
+  </conjurConfiguration>
+</org.conjur.jenkins.configuration.GlobalConjurConfiguration>

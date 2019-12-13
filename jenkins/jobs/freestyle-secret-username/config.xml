@@ -1,0 +1,31 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties/>
+  <scm class="hudson.scm.NullSCM"/>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers/>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>echo &quot;$CONJUR_SECRET&quot; | base64</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers/>
+  <buildWrappers>
+    <org.jenkinsci.plugins.credentialsbinding.impl.SecretBuildWrapper plugin="credentials-binding@1.20">
+      <bindings>
+        <org.conjur.jenkins.conjursecrets.ConjurSecretUsernameCredentialsBinding plugin="Conjur@0.7">
+          <credentialsId>GIT_ACCESS_TOKEN_USERNAME_GLOBAL</credentialsId>
+          <usernameVariable>USERNAME</usernameVariable>
+          <passwordVariable>CONJUR_SECRET</passwordVariable>
+        </org.conjur.jenkins.conjursecrets.ConjurSecretUsernameCredentialsBinding>
+      </bindings>
+    </org.jenkinsci.plugins.credentialsbinding.impl.SecretBuildWrapper>
+  </buildWrappers>
+</project>

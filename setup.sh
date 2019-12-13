@@ -37,13 +37,23 @@ fi
 
 
 sleep 10
+
+if [[ $BUILD_HPI_FROM_REPO -eq 1 ]]; then
+  output=$(./pull_conjur_credentials_plugin.sh)
+  export CONJUR_PLUGIN_PATH=$(echo "$output" | tail -n 1)
+fi
 echo "import the conjur credential plugin: $CONJUR_PLUGIN_PATH"
 curl -i -F file=@$CONJUR_PLUGIN_PATH http://localhost:8080/pluginManager/uploadPlugin
-sleep 15
 
-# after installing plugin copy over the team1 folder to jobs
-docker cp jenkins/jobs/team1 jenkins-master:/var/jenkins_home/jobs/team1
+sleep 45
+
+# after installing plugin copy over the needed content
+docker cp jenkins/jobs jenkins-master:/var/jenkins_home
+docker cp jenkins/org.conjur.jenkins.configuration.GlobalConjurConfiguration.xml jenkins-master:/var/jenkins_home/org.conjur.jenkins.configuration.GlobalConjurConfiguration.xml
+docker cp jenkins/credentials.xml jenkins-master:/var/jenkins_home/credentials.xml
 docker exec --user root jenkins-master chown -R jenkins:jenkins /var/jenkins_home
+
+sleep 15
 
 echo "restarting jenkins"
 curl http://localhost:8080/safeRestart/safeRestart --data {}
@@ -51,10 +61,16 @@ curl http://localhost:8080/safeRestart/safeRestart --data {}
 sleep 45
 
 # delete the HOST_TEST_JENKINS credential and replace with newly generated api key
-echo "Adding jenkins host api key to jenkins"
+echo "Adding jenkins host api key to jenkins for folder"
 curl -X DELETE "$JENKINS_URL/job/team1/credentials/store/folder/domain/_/credential/HOST_TEST_JENKINS/config.xml"
 sed "s/{{ API_KEY }}/$api_key/g" jenkins/credentials/HOST_TEST_JENKINS.xml > tmp/api_key.xml
 curl -X POST -H 'content-type:application/xml' -d @tmp/api_key.xml "http://localhost:8080/job/team1/credentials/store/folder/domain/_/createCredentials"
+
+echo "Adding jenkins host api key to jenkins for global"
+curl -X DELETE "$JENKINS_URL/credentials/store/system/domain/_/credential/HOST_TEST_JENKINS_GLOBAL/config.xml"
+sed "s/{{ API_KEY }}/$api_key/g" jenkins/credentials/HOST_TEST_JENKINS_GLOBAL.xml > tmp/api_key.xml
+curl -X POST -H 'content-type:application/xml' -d @tmp/api_key.xml "$JENKINS_URL/credentials/store/system/domain/_/createCredentials"
+
 
 ./tests.sh
 
