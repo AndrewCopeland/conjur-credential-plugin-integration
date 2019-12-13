@@ -10,5 +10,5 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- script: ./setup.sh dap
+- script: bash -x ./setup.sh dap
   displayName: 'Run dap and test'
