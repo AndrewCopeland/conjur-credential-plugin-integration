@@ -4,9 +4,9 @@ Testing the conjur jenkins credential plugin integration
 
 ## Setup
 `setup.sh dap` will install and configure  dap and jenkins.
-- install conjur
+- run the dap image (running on https://localhost)
 - load `policy.yml` into conjur
-- build jenkins image with conjur ssl cert
+- build jenkins image with conjur ssl cert (running on http://localhost:8080)
 - run jenkins image
 - fetch the conjur-credentials-plugin and compile plugin into hpi
 - load plugin into jenkins
