@@ -87,6 +87,8 @@ folder="team1"
 id_freestyle_secret=$(start_test "$folder" "freestyle-secret")
 id_freestyle_secret_username=$(start_test "$folder" "freestyle-secret-username")
 id_freestyle_secret_ssh_key=$(start_test "$folder" "freestyle-secret-ssh-key")
+id_freestyle_jit_secret=$(start_test "$folder" "freestyle-jit-secret")
+id_freestyle_jit_secret_username=$(start_test "$folder" "freestyle-jit-secret-username")
 
 # global tests
 id_freestyle_secret_global=$(start_test "" "freestyle-secret")
@@ -96,6 +98,9 @@ id_freestyle_secret_username_global=$(start_test "" "freestyle-secret-username")
 validate_test "$folder" "freestyle-secret" "$id_freestyle_secret" "$GIT_ACCESS_TOKEN"
 validate_test "$folder" "freestyle-secret-username" "$id_freestyle_secret_username" "$GIT_ACCESS_TOKEN"
 validate_test "$folder" "freestyle-secret-ssh-key" "$id_freestyle_secret_ssh_key" "$GIT_ACCESS_TOKEN"
+validate_test "$folder" "freestyle-jit-secret" "$id_freestyle_jit_secret" "$TEAM_SECRET"
+validate_test "$folder" "freestyle-jit-secret-username" "$id_freestyle_jit_secret_username" "$TEAM_SECRET"
+
 validate_test "" "freestyle-secret" "$id_freestyle_secret_global" "$GIT_ACCESS_TOKEN"
 validate_test "" "freestyle-secret-username" "$id_freestyle_secret_username_global" "$GIT_ACCESS_TOKEN"
 

@@ -41,3 +41,7 @@ function announce {
 	echo "$1"
 	echo "##############################################"
 }
+
+function repo_name {
+	echo "$1" | awk -F '/' '{print $5}'
+}

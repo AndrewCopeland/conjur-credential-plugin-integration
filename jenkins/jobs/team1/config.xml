@@ -47,6 +47,23 @@
               </conjurConfiguration>
               <passphrase>{AQAAABAAAAAQds0VcBcIBwSYDswJHiGms3ILbN1ZF4DgW18blEyWlvo=}</passphrase>
             </org.conjur.jenkins.conjursecrets.ConjurSecretUsernameSSHKeyCredentialsImpl>
+            <org.conjur.jenkins.conjursecrets.ConjurSecretCredentialsImpl plugin="Conjur@0.8">
+              <id>TEAM1_SECRET</id>
+              <description>TEAM1_SECRET</description>
+              <variablePath>team1/secret</variablePath>
+            </org.conjur.jenkins.conjursecrets.ConjurSecretCredentialsImpl>
+            <org.conjur.jenkins.conjursecrets.ConjurSecretUsernameCredentialsImpl plugin="Conjur@0.8">
+              <id>TEAM_USERNAME_SECRET</id>
+              <description>TEAM_USERNAME_SECRET</description>
+              <username>username</username>
+              <credentialID>TEAM1_SECRET</credentialID>
+              <conjurConfiguration>
+                <applianceURL>https://conjur-master</applianceURL>
+                <account>conjur</account>
+                <credentialID></credentialID>
+                <certificateCredentialID></certificateCredentialID>
+              </conjurConfiguration>
+            </org.conjur.jenkins.conjursecrets.ConjurSecretUsernameCredentialsImpl>
           </java.util.concurrent.CopyOnWriteArrayList>
         </entry>
       </domainCredentialsMap>

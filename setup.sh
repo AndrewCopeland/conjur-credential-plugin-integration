@@ -1,4 +1,5 @@
 source config.sh
+source utils.sh
 
 start_time=$(date +%s)
 
@@ -19,11 +20,11 @@ api_key=$(cat output | tail -n 1 | awk -F "API_KEY: " '{print $2}')
 rm output
 
 if [[ "$api_key" == "" ]]; then
-  echo "ERROR: Faield to get host api_key"
+  echo "ERROR: Failed to get host api_key"
   exit 1
 fi
 
-# if it is dap then get the certificate and copy to jenkins folder
+# if it is dap then get the certificate and copy to jenkins folder (self-signed certificate)
 if [[ "$1" == "dap" ]]; then
   rm -rf tmp
   mkdir tmp
@@ -38,19 +39,40 @@ else
   ./setup-jenkins.sh "jenkins/jenkins"
 fi
 
-
 sleep 10
 
-if [[ $BUILD_HPI_FROM_REPO -eq 1 ]]; then
+# configure conjur authn-jenkins authenticator
+if [ $MOUNT_AUTHN_JENKINS = true ]; then
+  header=$(conjur_authenticate)
+  echo "loading authn-jenkins policies"
+  config_authn_jenkins="./$(repo_name $GIT_AUTHN_JENKINS)/tests/config.yml"
+  job_authn_jenkins="./$(repo_name $GIT_AUTHN_JENKINS)/tests/job.yml"
+
+  append_policy "root" "$config_authn_jenkins"
+  append_policy "root" "$job_authn_jenkins"
+
+  set_variable "conjur/authn-jenkins/prod/jenkinsURL" "http://jenkins-master:8080"
+  set_variable "conjur/authn-jenkins/prod/jenkinsUsername" "conjur"
+  set_variable "conjur/authn-jenkins/prod/jenkinsPassword" "cyberark1"
+  set_variable "team1/secret" "$TEAM_SECRET"
+
+  echo "setting jenkins certificate in conjur"
+  jenkins_public_key=$(curl -sSL -D - http://localhost:8080 -o /dev/null | grep "X-Instance-Identity" | awk -F 'X-Instance-Identity: ' '{print $2}')
+  echo "jenkins public key: $jenkins_public_key"
+  set_variable "conjur/authn-jenkins/prod/jenkinsCertificate" "$jenkins_public_key"
+fi
+
+if [ $BUILD_HPI_FROM_REPO = true ]; then
   output=$(./pull_conjur_credentials_plugin.sh)
   export CONJUR_PLUGIN_PATH=$(echo "$output" | tail -n 1)
 fi
+
 echo "import the conjur credential plugin: $CONJUR_PLUGIN_PATH"
 curl -i -F file=@$CONJUR_PLUGIN_PATH http://localhost:8080/pluginManager/uploadPlugin
 
 sleep 45
 
-# after installing plugin copy over the needed content
+# after installing plugin copy over the needed content (configuration, credential and jobs)
 docker cp jenkins/jobs jenkins-master:/var/jenkins_home
 docker cp jenkins/org.conjur.jenkins.configuration.GlobalConjurConfiguration.xml jenkins-master:/var/jenkins_home/org.conjur.jenkins.configuration.GlobalConjurConfiguration.xml
 docker cp jenkins/credentials.xml jenkins-master:/var/jenkins_home/credentials.xml
