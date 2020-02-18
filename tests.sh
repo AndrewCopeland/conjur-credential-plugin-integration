@@ -79,6 +79,35 @@ function validate_test {
   fi
 }
 
+function validate_fail_test {
+  folder=$1
+  job_name=$2
+  build_number=$3
+  expected_result=$4
+  TOTAL_TESTS=$(($TOTAL_TESTS + 1))
+  echo "-------------------------------------"
+  echo "Validating test - $folder/$job_name #$build_number - expecting result '$expected_result'"
+  console=$(get_job_response_in_folder "$folder" "$job_name" "$build_number")
+  failed_job=echo "$console" | grep "Finish: FAILED"
+  if [[ "$failed_job" == "" ]]; then
+    echo "$console"
+    echo "FAILED: Job passed but should have failed"
+    FAILED_TESTS=$(($FAILED_TESTS + 1))
+    return 1
+  fi
+
+  default_password=$(echo "$console" | grep "$expected_result")
+  if [[ "$default_password" == "" ]]; then
+    echo "$console"
+    echo "FAILED: Recieved invalid response from jenkins"
+	  FAILED_TESTS=$(($FAILED_TESTS + 1))
+    # exit 1
+  else
+	  PASSED_TESTS=$(($PASSED_TESTS + 1))
+	  echo "PASSED"
+  fi
+}
+
 start=$(date +%s)
 
 # run the tests
@@ -93,6 +122,7 @@ id_freestyle_jit_secret_username=$(start_test "$folder" "freestyle-jit-secret-us
 # global tests
 id_freestyle_secret_global=$(start_test "" "freestyle-secret")
 id_freestyle_secret_username_global=$(start_test "" "freestyle-secret-username")
+id_freestyle_secret_not_found_global=$(start_test "" "freestyle-secret-not-found")
 
 # validate all of the tests
 validate_test "$folder" "freestyle-secret" "$id_freestyle_secret" "$GIT_ACCESS_TOKEN"
@@ -104,7 +134,8 @@ validate_test "$folder" "freestyle-jit-secret-username" "$id_freestyle_jit_secre
 validate_test "" "freestyle-secret" "$id_freestyle_secret_global" "$GIT_ACCESS_TOKEN"
 validate_test "" "freestyle-secret-username" "$id_freestyle_secret_username_global" "$GIT_ACCESS_TOKEN"
 
-
+# validate expected failures
+validate_fail_test "" "freestyle-secret-not-found" "$id_freestyle_secret_not_found_global" "Variable 'does/not/exists' not found in account 'conjur'"
 
 end=$(date +%s)
 duration=$((end - start))
