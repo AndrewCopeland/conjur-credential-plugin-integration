@@ -20,7 +20,7 @@ export TEAM_SECRET="default"
 # 1 is compile from repo, 0 is use local file 'CONJUR_PLUGIN_PATH'
 export BUILD_HPI_FROM_REPO=true
 export CREDENTIAL_PLUGIN_REPO="https://github.com/cyberark/conjur-credentials-plugin.git"
-export CREDENTIAL_PLUGIN_BRANCH="JIT-Creds"
+export CREDENTIAL_PLUGIN_BRANCH="master"
 
 export MOUNT_AUTHN_JENKINS=true
 export GIT_AUTHN_JENKINS="https://github.com/AndrewCopeland/conjur-authn-jenkins"

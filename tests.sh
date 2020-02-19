@@ -1,4 +1,5 @@
 source config.sh
+source utils.sh
 # set -ex #echo one
 # its failing for some reason when set -e.
 # I have to look into this but at this point the instance should be setup correctly.
@@ -70,12 +71,12 @@ function validate_test {
   default_password=$(echo "$console" | grep "$expected_password")
   if [[ "$default_password" == "" ]]; then
     echo "$console"
-    echo "FAILED: Recieved invalid password from jenkins"
+    echo_red "FAILED: Recieved invalid password from jenkins"
 	  FAILED_TESTS=$(($FAILED_TESTS + 1))
     # exit 1
   else
 	  PASSED_TESTS=$(($PASSED_TESTS + 1))
-	  echo "PASSED"
+	  echo_green "PASSED"
   fi
 }
 
@@ -88,10 +89,9 @@ function validate_fail_test {
   echo "-------------------------------------"
   echo "Validating test - $folder/$job_name #$build_number - expecting result '$expected_result'"
   console=$(get_job_response_in_folder "$folder" "$job_name" "$build_number")
-  failed_job=echo "$console" | grep "Finish: FAILED"
-  if [[ "$failed_job" == "" ]]; then
+  if [[ "$console" != *"Finished: FAILURE"* ]]; then
     echo "$console"
-    echo "FAILED: Job passed but should have failed"
+    echo_red "FAILED: Job passed but should have failed"
     FAILED_TESTS=$(($FAILED_TESTS + 1))
     return 1
   fi
@@ -99,12 +99,12 @@ function validate_fail_test {
   default_password=$(echo "$console" | grep "$expected_result")
   if [[ "$default_password" == "" ]]; then
     echo "$console"
-    echo "FAILED: Recieved invalid response from jenkins"
+    echo_red "FAILED: Recieved invalid response from jenkins"
 	  FAILED_TESTS=$(($FAILED_TESTS + 1))
     # exit 1
   else
 	  PASSED_TESTS=$(($PASSED_TESTS + 1))
-	  echo "PASSED"
+	  echo_green "PASSED"
   fi
 }
 
@@ -128,8 +128,9 @@ id_freestyle_secret_not_found_global=$(start_test "" "freestyle-secret-not-found
 validate_test "$folder" "freestyle-secret" "$id_freestyle_secret" "$GIT_ACCESS_TOKEN"
 validate_test "$folder" "freestyle-secret-username" "$id_freestyle_secret_username" "$GIT_ACCESS_TOKEN"
 validate_test "$folder" "freestyle-secret-ssh-key" "$id_freestyle_secret_ssh_key" "$GIT_ACCESS_TOKEN"
-validate_test "$folder" "freestyle-jit-secret" "$id_freestyle_jit_secret" "$TEAM_SECRET"
-validate_test "$folder" "freestyle-jit-secret-username" "$id_freestyle_jit_secret_username" "$TEAM_SECRET"
+
+# validate_test "$folder" "freestyle-jit-secret" "$id_freestyle_jit_secret" "$TEAM_SECRET"
+# validate_test "$folder" "freestyle-jit-secret-username" "$id_freestyle_jit_secret_username" "$TEAM_SECRET"
 
 validate_test "" "freestyle-secret" "$id_freestyle_secret_global" "$GIT_ACCESS_TOKEN"
 validate_test "" "freestyle-secret-username" "$id_freestyle_secret_username_global" "$GIT_ACCESS_TOKEN"
@@ -143,14 +144,14 @@ echo "------------------------------"
 echo "OUTPUT"
 echo "------------------------------"
 echo "test duration $duration seconds"
-echo "PASSED: $PASSED_TESTS"
-echo "FAILED: $FAILED_TESTS"
-echo "TOTAL: $TOTAL_TESTS"
+echo_green "PASSED: $PASSED_TESTS"
+echo_red "FAILED: $FAILED_TESTS"
+echo_yellow "TOTAL: $TOTAL_TESTS"
 
 if [[ $TOTAL_TESTS -eq $PASSED_TESTS ]] ; then
-  echo "success all tests passed"
+  echo_green "success all tests passed"
 else 
-  echo "FAILED! All tests did not pass!"
+  echo_red "FAILED! All tests did not pass!"
   exit 1
 fi
 

@@ -3,6 +3,11 @@ set -e
 
 util_defaults="set -e"
 
+RED='\033[0;31m'
+NC='\033[0m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m' 
+
 function conjur_authenticate {
 	$util_defaults
     api_key=$(curl --fail -s -k --user "admin:$ADMIN_PASSWORD" $CONJUR_URL/authn/conjur/login)
@@ -44,4 +49,16 @@ function announce {
 
 function repo_name {
 	echo "$1" | awk -F '/' '{print $5}'
+}
+
+function echo_red {
+	echo -e "${RED}${1}${NC}"
+}
+
+function echo_green {
+	echo -e "${GREEN}${1}${NC}"
+}
+
+function echo_yellow {
+	echo -e "${YELLOW}${1}${NC}"
 }
