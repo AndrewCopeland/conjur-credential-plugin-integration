@@ -1,4 +1,4 @@
-FROM jenkins/jenkins
+FROM jenkins/jenkins:2.206
 ENV JAVA_HOME /usr/local/openjdk-8
 ENV JENKINS_HOME /var/jenkins_home
 
