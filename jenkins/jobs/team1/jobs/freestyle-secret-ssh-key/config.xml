@@ -32,11 +32,12 @@ echo &quot;$CONJUR_SECRET&quot; | base64</command>
   </builders>
   <publishers/>
   <buildWrappers>
-    <org.jenkinsci.plugins.credentialsbinding.impl.SecretBuildWrapper plugin="credentials-binding@1.20">
+    <org.jenkinsci.plugins.credentialsbinding.impl.SecretBuildWrapper plugin="credentials-binding@1.21">
       <bindings>
         <org.conjur.jenkins.conjursecrets.ConjurSecretUsernameSSHKeyCredentialsBinding plugin="Conjur@0.8">
           <credentialsId>GIT_ACCESS_TOKEN_SSH_KEY</credentialsId>
           <usernameVariable>USERNAME</usernameVariable>
+          <secretVariable>CONJUR_SECRET</secretVariable>
         </org.conjur.jenkins.conjursecrets.ConjurSecretUsernameSSHKeyCredentialsBinding>
       </bindings>
     </org.jenkinsci.plugins.credentialsbinding.impl.SecretBuildWrapper>
