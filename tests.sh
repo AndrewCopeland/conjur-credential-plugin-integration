@@ -123,6 +123,7 @@ id_freestyle_jit_secret_username=$(start_test "$folder" "freestyle-jit-secret-us
 id_freestyle_secret_global=$(start_test "" "freestyle-secret")
 id_freestyle_secret_username_global=$(start_test "" "freestyle-secret-username")
 id_freestyle_secret_not_found_global=$(start_test "" "freestyle-secret-not-found")
+id_freestyle_secret_ssh_key_global=$(start_test "" "freestyle-secret-ssh-key")
 
 # validate all of the tests
 validate_test "$folder" "freestyle-secret" "$id_freestyle_secret" "$GIT_ACCESS_TOKEN"
@@ -134,6 +135,7 @@ validate_test "$folder" "freestyle-secret-ssh-key" "$id_freestyle_secret_ssh_key
 
 validate_test "" "freestyle-secret" "$id_freestyle_secret_global" "$GIT_ACCESS_TOKEN"
 validate_test "" "freestyle-secret-username" "$id_freestyle_secret_username_global" "$GIT_ACCESS_TOKEN"
+validate_test "" "freestyle-secret-ssh-key" "$id_freestyle_secret_ssh_key_global" "$GIT_SSH_KEY"
 
 # validate expected failures
 validate_fail_test "" "freestyle-secret-not-found" "$id_freestyle_secret_not_found_global" "Variable 'does/not/exists' not found in account 'conjur'"
