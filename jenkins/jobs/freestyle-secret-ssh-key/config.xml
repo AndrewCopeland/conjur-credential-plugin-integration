@@ -1,0 +1,44 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<project>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <org.conjur.jenkins.configuration.ConjurJITJobProperty plugin="Conjur@0.8">
+      <inheritFromParent>true</inheritFromParent>
+      <useJustInTime>false</useJustInTime>
+      <authWebServiceId></authWebServiceId>
+      <hostPrefix></hostPrefix>
+      <conjurConfiguration>
+        <applianceURL></applianceURL>
+        <account></account>
+        <credentialID></credentialID>
+        <certificateCredentialID></certificateCredentialID>
+      </conjurConfiguration>
+    </org.conjur.jenkins.configuration.ConjurJITJobProperty>
+  </properties>
+  <scm class="hudson.scm.NullSCM"/>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers/>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>echo &quot;$USERNAME&quot; | base64
+echo &quot;$CONJUR_SECRET&quot; | base64</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers/>
+  <buildWrappers>
+    <org.jenkinsci.plugins.credentialsbinding.impl.SecretBuildWrapper plugin="credentials-binding@1.21">
+      <bindings>
+        <org.conjur.jenkins.conjursecrets.ConjurSecretUsernameSSHKeyCredentialsBinding plugin="Conjur@0.8">
+          <credentialsId>GIT_USERNAME_SSH_KEY</credentialsId>
+          <usernameVariable>USERNAME</usernameVariable>
+          <secretVariable>CONJUR_SECRET</secretVariable>
+        </org.conjur.jenkins.conjursecrets.ConjurSecretUsernameSSHKeyCredentialsBinding>
+      </bindings>
+    </org.jenkinsci.plugins.credentialsbinding.impl.SecretBuildWrapper>
+  </buildWrappers>
+</project>
