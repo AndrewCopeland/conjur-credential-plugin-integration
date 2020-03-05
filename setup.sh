@@ -70,6 +70,9 @@ fi
 echo "import the conjur credential plugin: $CONJUR_PLUGIN_PATH"
 curl -i -F file=@$CONJUR_PLUGIN_PATH http://localhost:8080/pluginManager/uploadPlugin
 
+echo "import the git plugin: $GIT_PLUGIN"
+curl -X POST -d "<jenkins><install plugin=\"$GIT_PLUGIN\" /></jenkins>" --header 'Content-Type: text/xml' http://localhost:8080/pluginManager/installNecessaryPlugins
+
 sleep 45
 
 # after installing plugin copy over the needed content (configuration, credential and jobs)
