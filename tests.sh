@@ -119,6 +119,7 @@ id_freestyle_secret_ssh_key=$(start_test "$team_folder" "freestyle-secret-ssh-ke
 id_freestyle_jit_secret=$(start_test "$team_folder" "freestyle-jit-secret")
 id_freestyle_jit_secret_username=$(start_test "$team_folder" "freestyle-jit-secret-username")
 id_freestyle_git_no_context=$(start_test "$team_folder" "freestyle-git-no-context")
+id_freestyle_git_no_context_username=$(start_test "$team_folder" "freestyle-git-no-context-username")
 
 
 # global tests
@@ -142,6 +143,7 @@ validate_test "" "freestyle-secret-ssh-key" "$id_freestyle_secret_ssh_key_global
 # validate expected failures
 validate_fail_test "" "freestyle-secret-not-found" "$id_freestyle_secret_not_found_global" "Variable 'does/not/exists' not found in account 'conjur'"
 validate_fail_test "$team_folder" "freestyle-git-no-context"  "$id_freestyle_git_no_context" "Unable to find credential at Global Instance Level"
+validate_fail_test "$team_folder" "freestyle-git-no-context-username" "$id_freestyle_git_no_context_username" "Unable to find credential at Global Instance Level"
 
 end=$(date +%s)
 duration=$((end - start))
