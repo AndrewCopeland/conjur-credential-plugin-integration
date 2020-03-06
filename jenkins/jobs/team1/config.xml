@@ -55,15 +55,8 @@
                 <credentialID>HOST_TEST_JENKINS</credentialID>
                 <certificateCredentialID></certificateCredentialID>
               </conjurConfiguration>
-              <passphrase>{AQAAABAAAABAFfFycnW90fvDE5T/ceh2g8m9F4tvYSdOiRAi5zdstK7Kht9P0HfsXtWM4t3URNekuGzJoGdce7tGNxoVoubPuzfzIbjyEZ+SiTjeBd7QzT8=}</passphrase>
+              <passphrase>{AQAAABAAAACAq+iB8gfKrNpPGdDLXvmSYVusBUBRAUlRbZRhK6Gb+KbBYvhP7eHymHYJTDsmFnYRzTSYVHlFBK5utHEZ+InMX1/pMa/tuSShUjET8I3y6Xk36Pt1unK0S/BGBQ9mEc88pwQTgyvgWwLJXTUn2D/gnp1Oyl04X5TjNBJP/sbLTlbUEnkkTBgDYm46hsOF2gRc}</passphrase>
             </org.conjur.jenkins.conjursecrets.ConjurSecretUsernameSSHKeyCredentialsImpl>
-            <com.cloudbees.plugins.credentials.impl.UsernamePasswordCredentialsImpl plugin="credentials@2.3.3">
-              <scope>GLOBAL</scope>
-              <id>HOST_TEST_JENKINS</id>
-              <description>Conjur host for jenkins</description>
-              <username>host/test-jenkins</username>
-              <password>{AQAAABAAAABAGT1LpKbexjJlFaNlc4JTA3rO3e/A6at70Fy/AFTIFHxyh18gIf6MU+q6gVZLQxxcCF1M8PV0v9VJ/8atcHvRYWyrrBURmDzyZV/oho+rDVo=}</password>
-            </com.cloudbees.plugins.credentials.impl.UsernamePasswordCredentialsImpl>
             <org.conjur.jenkins.conjursecrets.ConjurSecretUsernameSSHKeyCredentialsImpl plugin="Conjur@0.8">
               <id>GIT_INT_USERNAME_SSH_KEY_CONJUR</id>
               <description>GIT_INT_USERNAME_SSH_KEY_CONJUR</description>
@@ -75,8 +68,27 @@
                 <credentialID>HOST_TEST_JENKINS</credentialID>
                 <certificateCredentialID></certificateCredentialID>
               </conjurConfiguration>
-              <passphrase>{AQAAABAAAAAQIAoUr+oqUhvV1rUNsdPntm4CMl+rHZuG2vkE5NzyEVc=}</passphrase>
+              <passphrase>{AQAAABAAAABAgfTgU+o5Vlcpn4uqcDqwh1/XEDsSLE9n6ymr2YNGv/jVh0YkLBJ4SNLdYdAGxqXQUuQLA11o7/GpoYHMoLx/uox7EZK5TKYXGlLntQeg1NE=}</passphrase>
             </org.conjur.jenkins.conjursecrets.ConjurSecretUsernameSSHKeyCredentialsImpl>
+            <com.cloudbees.plugins.credentials.impl.UsernamePasswordCredentialsImpl plugin="credentials@2.3.3">
+              <scope>GLOBAL</scope>
+              <id>HOST_TEST_JENKINS</id>
+              <description>Conjur host for jenkins</description>
+              <username>host/test-jenkins</username>
+              <password>{AQAAABAAAABAn4QhrLOP29Ozgiuv/L3gbwMEjbbvB8ZSGhPJr8taRckmhm21x1zIDjIBtzymAx0EpenyNG21hsQ/DpNr2E4SehDd6/TYA6SPYO2fVxjHKYA=}</password>
+            </com.cloudbees.plugins.credentials.impl.UsernamePasswordCredentialsImpl>
+            <org.conjur.jenkins.conjursecrets.ConjurSecretUsernameCredentialsImpl plugin="Conjur@0.8">
+              <id>GIT_INT_USERNAME_CONJUR</id>
+              <description>GIT_INT_USERNAME_CONJUR</description>
+              <username>git</username>
+              <credentialID>TEAM1_SECRET</credentialID>
+              <conjurConfiguration>
+                <applianceURL>https://conjur-master</applianceURL>
+                <account>conjur</account>
+                <credentialID>HOST_TEST_JENKINS</credentialID>
+                <certificateCredentialID></certificateCredentialID>
+              </conjurConfiguration>
+            </org.conjur.jenkins.conjursecrets.ConjurSecretUsernameCredentialsImpl>
           </java.util.concurrent.CopyOnWriteArrayList>
         </entry>
       </domainCredentialsMap>
