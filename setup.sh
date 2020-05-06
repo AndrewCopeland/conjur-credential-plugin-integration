@@ -32,11 +32,11 @@ if [[ "$1" == "dap" ]]; then
   docker exec $CONJUR_NAME openssl s_client --showcerts --connect conjur-master:443 < /dev/null 2> /dev/null | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > $cert_path
   cat "$cert_path"
   cp $cert_path jenkins/
-  docker pull jenkins/jenkins
+  docker pull jenkins/jenkins:2.206
   docker build -t jenkins/conjur-jenkins:latest jenkins/
   ./setup-jenkins.sh "jenkins/conjur-jenkins:latest"
 else
-  ./setup-jenkins.sh "jenkins/jenkins"
+  ./setup-jenkins.sh "jenkins/jenkins:2.206"
 fi
 
 sleep 10
