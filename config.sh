@@ -5,7 +5,7 @@ export CONJUR_NAME="conjur-master"
 export ADMIN_PASSWORD="Cyberark1"
 export CONJUR_ACCOUNT_NAME="conjur"
 export HOST_USERNAME="host/test-jenkins"
-export CONJUR_PLUGIN_PATH="/Users/acopeland/git/AndrewCopeland/conjur-credential-plugin-integration/conjur-credentials-plugin/target/conjur-credentials.hpi"
+export CONJUR_PLUGIN_PATH="./conjur-credentials-plugin/target/conjur-credentials.hpi"
 
 export CONJUR_URL="https://127.0.0.1"
 export CONJUR_GIT_REPO="https://github.com/AndrewCopeland/conjur"
